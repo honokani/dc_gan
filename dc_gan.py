@@ -85,7 +85,6 @@ class GD_PAIR:
         self.gan = Model(input=gan_in, output=gan_out)
         self.gan.compile(loss='binary_crossentropy', optimizer=Adam())
 
-GENERATED_IMAGE_PATH = './generated_images/' # 生成画像の保存先
 def combine_images(generated_images):
     total = generated_images.shape[0]
     cols = int(math.sqrt(total))
@@ -100,6 +99,7 @@ def combine_images(generated_images):
     return combined_image
 
 def save_prediction(i, j, p):
+    GENERATED_IMAGE_PATH = './generated_images/'
     image = combine_images(p)
     image = image*127.5 + 127.5
     if (not os.path.exists(GENERATED_IMAGE_PATH)):
@@ -148,9 +148,4 @@ if(__name__=="__main__"):
     gd_a.d.load_weights('dis_scaled_images.h5')
 
     train(gd_a, X_train, 30, 128)
-    gd_a.g.save_weights('gen_scaled_images_30.h5')
-    gd_a.d.save_weights('dis_scaled_images_30.h5')
-    train(gd_a, X_train, 20, 128)
-    gd_a.g.save_weights('gen_scaled_images_50.h5')
-    gd_a.d.save_weights('dis_scaled_images_50.h5')
 
