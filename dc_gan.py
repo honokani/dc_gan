@@ -147,5 +147,10 @@ if(__name__=="__main__"):
     gd_a.g.load_weights('gen_scaled_images.h5')
     gd_a.d.load_weights('dis_scaled_images.h5')
 
-    train(gd_a, X_train, 30, 128)
+    train(gd_a, X_train, 20, 128)
+    gd_a.g.save_weights('gen_scaled_images_1.h5')
+    gd_a.d.save_weights('dis_scaled_images_1.h5')
+    train(gd_a, X_train, 20, 128)
+    gd_a.g.save_weights('gen_scaled_images_2.h5')
+    gd_a.d.save_weights('dis_scaled_images_2.h5')
 
